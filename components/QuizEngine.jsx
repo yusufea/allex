@@ -351,7 +351,7 @@ export default function QuizEngine({ quizData, quizList }) {
                 <div className="w-full md:w-2/3">
                     {isFinished ? (
                         <div className="animate-in fade-in zoom-in-95 duration-500">
-                            {quizData.id === 'bmi-checker' ? renderBMIResult() : 
+                            {quizData.id === 'bmi-calculator' ? renderBMIResult() : 
                              quizData.id === 'general-health-checker' ? renderGeneralHealthResult() : 
                              renderStandardResult()}
                         </div>
@@ -395,7 +395,7 @@ export default function QuizEngine({ quizData, quizList }) {
                                                             className={cn(
                                                                 "w-3/4 p-1 rounded-full mt-1 border-2 text-lg font-medium transition-all text-center",
                                                                 isSelected 
-                                                                    ? (quizData.id === 'bmi-checker' ? "border-green-600 bg-green-600 text-white" : "border-slate-900 bg-slate-900 text-white") 
+                                                                    ? (quizData.id === 'bmi-calculator' ? "border-green-600 bg-green-600 text-white" : "border-slate-900 bg-slate-900 text-white") 
                                                                     : "border-gray-300 text-gray-500 hover:border-gray-400 bg-white"
                                                             )}
                                                         >

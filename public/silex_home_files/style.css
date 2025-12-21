@@ -1082,19 +1082,19 @@
 .symptoms-checker.general-health .mobile-symptoms-checker-navigation-wrapper {
   --symptoms-checker-navigation-button-fgColor: #000;
 }
-.symptoms-checker.bmi-checker {
+.symptoms-checker.bmi-calculator {
   --test-color-theme: 212 98% 34%;
 }
-.symptoms-checker.bmi-checker .active-symptoms-checker-tab {
+.symptoms-checker.bmi-calculator .active-symptoms-checker-tab {
   --symptoms-checker-navigation-button-bgColor: var(--test-color-theme);
   --symptoms-checker-navigation-button-fgColor: #fff;
   --symptoms-checker-navigation-button-hover-fgColor: #fafafa;
   --button-opacity-hover: 0.8;
 }
-.symptoms-checker.bmi-checker .mobile-symptoms-checker-navigation-wrapper {
+.symptoms-checker.bmi-calculator .mobile-symptoms-checker-navigation-wrapper {
   --symptoms-checker-navigation-button-fgColor: #fff;
 }
-.symptoms-checker.bmi-checker .results-recommendation-btn-wrapper {
+.symptoms-checker.bmi-calculator .results-recommendation-btn-wrapper {
   --test-color-theme: 38 97% 53%;
   --symptoms-checker-navigation-button-fgColor: #000;
 }
@@ -1637,13 +1637,13 @@
   margin: 0;
 }
 
-.bmi-checker {
+.bmi-calculator {
   font-family: "Lato", sans-serif;
 }
-.bmi-checker .results-recommendation-btn-wrapper {
+.bmi-calculator .results-recommendation-btn-wrapper {
   margin: 40px 0;
 }
-.bmi-checker .results-recommendation-btn-wrapper .btn {
+.bmi-calculator .results-recommendation-btn-wrapper .btn {
   width: 100%;
   border-radius: 60px;
   height: 60px;
@@ -1652,12 +1652,12 @@
   font-size: 28px;
   text-transform: capitalize;
 }
-.bmi-checker h3 {
+.bmi-calculator h3 {
   font-size: 32px;
   font-family: "Lato", sans-serif;
   margin: 0;
 }
-.bmi-checker .symptoms-main-section .main-section-title > span {
+.bmi-calculator .symptoms-main-section .main-section-title > span {
   margin-top: 60px;
   text-transform: none;
   font-weight: 400;
@@ -1845,7 +1845,7 @@
     padding: 12px 40px;
     line-height: 1.4;
   }
-  .bmi-checker .symptoms-main-section .main-section-title > span {
+  .bmi-calculator .symptoms-main-section .main-section-title > span {
     margin-top: 20px;
   }
   .controls-wrapper .symptoms-answer {
@@ -3484,7 +3484,7 @@ img {
 .uti-checker .main-section-title,
 .diabetes-checker .main-section-title,
 .male-fertility-checker .main-section-title,
-.bmi-checker .main-section-title {
+.bmi-calculator .main-section-title {
   text-transform: none;
 }
 .hypothyroidisim-checker .main-section-title > span,
@@ -3497,7 +3497,7 @@ img {
 .uti-checker .main-section-title > span,
 .diabetes-checker .main-section-title > span,
 .male-fertility-checker .main-section-title > span,
-.bmi-checker .main-section-title > span {
+.bmi-calculator .main-section-title > span {
   text-transform: none;
   margin-top: 12px;
 }

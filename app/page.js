@@ -9,12 +9,12 @@ export default function Home() {
   const { t } = useTranslation();
 
   const heroButtons = [
-    { key: "hero.btn_symptoms", href: "/health-check/check-symptoms", color: "bg-blue-100 text-blue-700 hover:bg-blue-200" },
-    { key: "hero.btn_conditions", href: "/health-check/vitamin-d-checker", color: "bg-green-100 text-green-700 hover:bg-green-200" },
-    { key: "hero.btn_index", href: "/health-check/general-health-checker", color: "bg-purple-100 text-purple-700 hover:bg-purple-200" },
-    { key: "hero.btn_silex", href: "/self-tests", color: "bg-rose-100 text-rose-700 hover:bg-rose-200" },
-    { key: "hero.btn_buy", href: "/where-to-buy", color: "bg-orange-100 text-orange-700 hover:bg-orange-200" },
-    { key: "hero.btn_distributor", href: "/distributor", color: "bg-slate-200 text-slate-700 hover:bg-slate-300" }
+    { key: "hero.btn_symptoms", href: "/health-check/check-symptoms", color: "bg-blue-100 text-blue-700 hover:bg-blue-400" },
+    { key: "hero.btn_conditions", href: "/health-check/vitamin-d-checker", color: "bg-green-100 text-green-700 hover:bg-green-400" },
+    { key: "hero.btn_index", href: "/health-check/general-health-checker", color: "bg-purple-100 text-purple-700 hover:bg-purple-400" },
+    { key: "hero.btn_silex", href: "/self-tests", color: "bg-rose-100 text-rose-700 hover:bg-rose-400" },
+    { key: "hero.btn_buy", href: "/where-to-buy", color: "bg-orange-100 text-orange-700 hover:bg-orange-400" },
+    { key: "hero.btn_distributor", href: "/distributor", color: "bg-slate-300 text-slate-700 hover:bg-slate-300" }
   ];
 
   const features = [
@@ -109,7 +109,7 @@ export default function Home() {
     <div className="w-full min-h-[80vh] flex flex-col items-center bg-white">
 
       {/* --- HERO SECTION --- */}
-      <div className="container max-[800px]:p-4 max-[1200px]:p-6 mx-auto p-20">
+      <div className="container max-[800px]:p-5 max-[800px]:pt-8 max-[1200px]:p-6 mx-auto p-20">
         <div className="flex flex-col lg:flex-row gap-10 items-center justify-center">
 
           {/* SOL TARAF */}
