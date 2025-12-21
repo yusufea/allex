@@ -1,0 +1,12 @@
+document.addEventListener("DOMContentLoaded", () => {
+	let timer;
+	const videoVar = "aboutSilexVideo";
+	const currentURL = window.location.href;
+	if (currentURL.includes(videoVar)) {
+	  timer = setTimeout(() => {
+		clearTimeout(timer);
+		document.getElementById(videoVar).scrollIntoView();
+	  }, 2000);
+	}
+  });
+  

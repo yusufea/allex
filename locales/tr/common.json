@@ -1,0 +1,15 @@
+{
+  "nav": {
+    "home": "Anasayfa",
+    "health_checkgers": "SAĞLIK KONTROLLERİ",
+    "self_tests": "KENDİNİ TEST ET",
+    "our_story": "HİKAYEMİZ",
+    "health_hub": "SAĞLIK MERKEZİ",
+    "login": "SAĞLIK PROFİLİNİZ | GİRİŞ",
+    "contact": "İLETİŞİM",
+    "symptoms": "Semptom Kontrolü",
+    "conditions": "Sağlık Durumu Kontrolü",
+    "iron": "Demir Eksikliği (FERRITIN)",
+    "thyroid": "Tiroid Tembelliği (TSH)"
+  }
+}

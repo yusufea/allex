@@ -1,0 +1,15 @@
+{
+  "nav": {
+    "home": "Home",
+    "health_checkgers": "HEALTH CHECKERS",
+    "self_tests": "SELF TESTS",
+    "our_story": "OUR STORY",
+    "health_hub": "HEALTH HUB",
+    "login": "YOUR HEALTH PROFILE | LOG IN",
+    "contact": "CONTACT US",
+    "symptoms": "Check Symptoms",
+    "conditions": "Check Health Conditions",
+    "iron": "Iron Deficiency (FERRITIN)",
+    "thyroid": "Under Active Thyroid (TSH)"
+  }
+}

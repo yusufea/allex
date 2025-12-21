@@ -1,0 +1,10 @@
+let timer;
+
+timer = window.setTimeout(() => {
+	window.clearTimeout(timer);
+	let main = document.getElementById('mainSection');
+	let loader = document.getElementById('loaderSection');
+	loader?.remove();
+	main?.classList.remove("hide");
+}, 2000)
+

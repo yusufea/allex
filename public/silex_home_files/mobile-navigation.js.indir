@@ -1,0 +1,55 @@
+document.addEventListener("DOMContentLoaded", function (event) {
+	let mobileNavigation = document.getElementById("mobileNavigation");
+	let mobileNavigationCloseButton = document.getElementById("closeMenu");
+	let mobileNavigationOpenButton = document.getElementById("openMenu");
+	let toggleMobileSubmenu = document.querySelectorAll(".toggleSubmenu");
+	let openPopupNavigation = document.getElementById("activeCheckerNavigation");
+	let closePopupNavigation = document.getElementById("closePopupNavigation");
+	let timer;
+
+	mobileNavigationCloseButton.onclick = () => {
+		mobileNavigation.style.transform = "translate(-100%)";
+		mobileNavigationOpenButton.style.display = "block";
+
+		timer = window.setTimeout(() => {
+			window.clearTimeout(timer);
+			mobileNavigation.style.display = "none";
+		}, 500)
+	}
+
+	mobileNavigationOpenButton.onclick = () => {
+		mobileNavigation.style.display = "flex";
+		mobileNavigationOpenButton.style.display = "none";
+
+		timer = window.setTimeout(() => {
+			window.clearTimeout(timer);
+			mobileNavigation.style.transform = "translate(125%)";
+		}, 100)
+	}
+
+	toggleMobileSubmenu.forEach(mobileSubmenu => mobileSubmenu.onclick = () => {
+		const menuItemArrow = mobileSubmenu.querySelector(".mobile-menu-dropdown-arrow");
+		if(menuItemArrow) {
+			menuItemArrow.classList.toggle('rotate');
+		}
+		mobileSubmenu.nextElementSibling.classList.toggle('show');
+	});
+
+	if (closePopupNavigation) closePopupNavigation.onclick = togglePopup;
+	if (openPopupNavigation) openPopupNavigation.onclick = togglePopup;
+
+	function togglePopup() {
+		const popup = document.getElementById('popupMobileNavigation');
+		if (popup) {
+			if(popup.style.display === 'flex') {
+				document.body.style.overflow = 'auto';
+				mainSection.style.overflowY = 'auto';
+				popup.style.display = 'none';
+			} else {
+				document.body.style.overflow = 'hidden';
+				mainSection.style.overflowY = 'hidden';
+				popup.style.display = 'flex';
+			}
+		}
+	}
+});

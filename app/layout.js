@@ -1,5 +1,26 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Header from "./header";
+// 1. localFont'u import et
+import localFont from "next/font/local";
+import Footer from "./footer";
+// 2. Fontu yapılandır
+const garet = localFont({
+  src: [
+    {
+      path: './fonts/Garet-Book.woff2',
+      weight: '400', // Book genelde 400 (Normal) kabul edilir
+      style: 'normal',
+    },
+    {
+      path: './fonts/Garet-Heavy.woff2',
+      weight: '900', // Heavy en kalın (Black) olandır
+      style: 'normal',
+    },
+  ],
+  variable: "--font-garet",
+  display: "swap",
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,9 +41,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${garet.variable} antialiased`}
       >
-        {children}
+        <Header />
+        <div className="mt-12">{children}</div>
+        <Footer />
       </body>
     </html>
   );
