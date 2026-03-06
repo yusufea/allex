@@ -53,7 +53,7 @@ export default function Footer() {
                     <div className="flex flex-col items-start gap-6 w-full">
                         <Link href="/" className="mb-2">
                             <Image
-                                src="/sliex-logo.png"
+                                src="/allvex-logo-transparent-2.png"
                                 alt="Silex Logo"
                                 width={200}
                                 height={55}

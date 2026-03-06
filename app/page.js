@@ -18,12 +18,12 @@ export default function Home() {
   ];
 
   const features = [
-    { id: 1, icon: '/clinically-approved.svg', title: 'Clinically approved' },
-    { id: 2, icon: '/rapid-results.svg', title: 'Rapid results' },
-    { id: 3, icon: '/easy-to-use.svg', title: 'Easy to use' },
-    { id: 4, icon: '/confidential.svg', title: 'Confidential' },
-    { id: 5, icon: '/convenient.svg', title: 'Convenient' },
-    { id: 6, icon: '/smart-extended-care.svg', title: 'SMART extended care' }
+    { id: 1, icon: '/clinically-approved.svg', titleKey: 'home.features.f1' },
+    { id: 2, icon: '/rapid-results.svg', titleKey: 'home.features.f2' },
+    { id: 3, icon: '/easy-to-use.svg', titleKey: 'home.features.f3' },
+    { id: 4, icon: '/confidential.svg', titleKey: 'home.features.f4' },
+    { id: 5, icon: '/convenient.svg', titleKey: 'home.features.f5' },
+    { id: 6, icon: '/smart-extended-care.svg', titleKey: 'home.features.f6' }
   ]
 
   const socialIcons = [
@@ -37,31 +37,31 @@ export default function Home() {
   const processSteps = [
     {
       id: 1,
-      title: 'Take a Test',
+      title: t('home.process.step1_title'),
       image: '/take-a-test.png',
       descriptions: [
-        'Do you have symptoms? Use our symptoms checker to recommend the test most relevant for you.',
-        'No symptoms? Just select the test you want to check your health for.'
+        t('home.process.step1_d1'),
+        t('home.process.step1_d2'),
       ]
     },
     {
       id: 2,
-      title: 'Track Your Results',
+      title: t('home.process.step2_title'),
       image: '/track-your-results.png',
       descriptions: [
-        'Follow our instructions for use on the Test Page and record your results.',
-        'Save your results to your Health Calendar.'
+        t('home.process.step2_d1'),
+        t('home.process.step2_d2'),
       ]
     },
     {
       id: 3,
-      title: 'Take Next Steps',
+      title: t('home.process.step3_title'),
       image: '/take-next-steps.png',
       descriptions: [
-        'Based on your result, you will receive medically verified recommended actions.',
-        'Book follow up GP appointments at your discretion.',
-        'Build your Health Profile to Stay on Top of Your Health.',
-        'Receive notifications for follow ups and testing recommendations based on your testing results and Health Profile.'
+        t('home.process.step3_d1'),
+        t('home.process.step3_d2'),
+        t('home.process.step3_d3'),
+        t('home.process.step3_d4'),
       ]
     }
   ]
@@ -201,14 +201,14 @@ export default function Home() {
                   <div className="relative h-[50px] sm:h-[75px] md:h-[100px] w-full flex justify-center">
                     <Image
                       src={feature.icon}
-                      alt={feature.title}
+                      alt={t(feature.titleKey)}
                       width={100}
                       height={100}
                       className="h-full w-auto object-contain"
                     />
                   </div>
                   <p className="text-[12px] sm:text-[13px] md:text-[14px] font-normal font-inter leading-tight text-center text-[#999999] max-w-[120px]">
-                    {feature.title}
+                    {t(feature.titleKey)}
                   </p>
                 </div>
               ))}
@@ -242,17 +242,14 @@ export default function Home() {
 
             {/* SOL TARAF: Resim Alanı (~%20 Width) */}
             {/* md:w-1/5 -> Masaüstünde %20 genişlik. flex-shrink-0 -> Küçülmesini engeller. */}
-            <div className="w-full md:w-1/5 flex-shrink-0 flex justify-center md:justify-start">
-              <div className="relative w-full h-full md:w-full md:h-auto aspect-square overflow-hidden p-8">
-                {/* BURAYA YAZARIN RESMİNİ EKLEYİN */}
-                <Image
-                  src="/silex-quote.svg" // Kendi resim yolunuzla değiştirin. Örn: "/doktor-ahmet.jpg"
-                  alt="Author Name"
-                  width={300}
-                  height={300}
-                  className="w-full h-full object-cover"
-                />
-              </div>
+            <div className="w-full md:w-1/5 flex-shrink-0 flex justify-center md:justify-center">
+              <Image
+                src="/allvex-logo-yatay-2.png"
+                alt="Author Name"
+                width={200}
+                height={40}
+                className="w-full max-w-[160px] h-auto object-contain"
+              />
             </div>
 
             {/* SAĞ TARAF: Alıntı İçeriği (~%80 Width) */}
@@ -265,16 +262,16 @@ export default function Home() {
 
               {/* Alıntı Metni */}
               <blockquote className="font-grant font-normal relative z-10 text-xl sm:text-xl md:text-2xl font-garet font-medium italic leading-relaxed text-slate-700 text-center md:text-left">
-                "Rapid tests are becoming a part of a healthcare diagnostic process, which allows patients and healthcare professionals to get on the front foot with their health, optimise their time and obtain accurate and rapid results in almost any environment."
+                &ldquo;{t('home.quote.text')}&rdquo;
               </blockquote>
 
               {/* Yazar ve Unvanı (Sağ Altta) */}
               <div className="font-grant font-normal  mt-8 flex flex-col items-center md:items-end text-center md:text-right">
                 <cite className="font-garet font-normal text-xl italic text-slate-700 ">
-                  Dr. Matthew Newman
+                  {t('home.quote.author')}
                 </cite>
                 <span className="font-grant font-normal font-inter text-xl italic text-slate-700 ">
-                  NHS Professional
+                  {t('home.quote.role')}
                 </span>
               </div>
 
@@ -289,7 +286,7 @@ export default function Home() {
 
           {/* Başlık */}
           <h3 className="font-garet font-black text-2xl md:text-2xl uppercase text-slate-900 text-left mb-8 md:mb-12 tracking-wide">
-            In Partnership With
+            {t('home.partners')}
           </h3>
 
           {/* Logo Grid */}
@@ -500,16 +497,16 @@ export default function Home() {
 
               {/* Başlık */}
               <h2 className="font-garet font-black text-5xl leading-tight text-slate-900 mb-6">
-                OUR MISSION
+                {t("home.mission.title")}
               </h2>
 
               <h2 className="font-garet font-black text-2xl leading-tight text-slate-900 mb-6">
-                When it comes to your personal health, being on the front foot is absolutely crucial.
+                {t("home.mission.subtitle")}
               </h2>
 
               {/* Paragraf */}
               <p className="font-garet font-normal text-base sm:text-lg text-slate-800 leading-relaxed max-w-xl font-medium">
-                Silex’s mission is to make high quality healthcare testing kits affordable and available for as many people as possible. We provide consumers an opportunity to monitor health and wellness outside of a clinic or hospital setting, and to seek medical advice and treatment at the earliest possible opportunity.
+                {t("home.mission.text")}
               </p>
 
               {/* Opsiyonel Buton (Gerekirse açabilirsin) */}

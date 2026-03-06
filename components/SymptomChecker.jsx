@@ -3,11 +3,14 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import "@/lib/i18n";
+import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { symptomsData } from "@/lib/symptoms-data";
 
 export default function SymptomChecker() {
+    const { t } = useTranslation();
     const [currentStep, setCurrentStep] = useState(1);
     const [selections, setSelections] = useState({});
     const [gender, setGender] = useState(null);
@@ -15,30 +18,24 @@ export default function SymptomChecker() {
     const totalSteps = symptomsData.steps.length;
     const stepData = symptomsData.steps.find(s => s.id === currentStep);
 
-    // Seçim İşlemi
     const handleSelect = (option) => {
-        // Adım 1 (Cinsiyet) - Tekli Seçim
         if (stepData.type === 'single') {
             setSelections(prev => ({ ...prev, [currentStep]: option.value }));
-            if (currentStep === 1) setGender(option.value); // Cinsiyeti kaydet
-        }
-        // Diğer Adımlar - Çoklu Seçim
-        else {
+            if (currentStep === 1) setGender(option.value);
+        } else {
             const currentSelections = selections[currentStep] || [];
 
-            // Eğer "None of the above" seçildiyse diğerlerini temizle
             if (option.isNone) {
                 setSelections(prev => ({ ...prev, [currentStep]: [option.value] }));
                 return;
             }
 
-            // Eğer "None" daha önce seçildiyse ve şimdi başka bir şeye tıklandıysa, "None"ı kaldır
             let newSelections = currentSelections.filter(v => v !== 'none');
 
             if (newSelections.includes(option.value)) {
-                newSelections = newSelections.filter(v => v !== option.value); // Çıkar
+                newSelections = newSelections.filter(v => v !== option.value);
             } else {
-                newSelections.push(option.value); // Ekle
+                newSelections.push(option.value);
             }
             setSelections(prev => ({ ...prev, [currentStep]: newSelections }));
         }
@@ -48,7 +45,7 @@ export default function SymptomChecker() {
         if (currentStep < totalSteps) {
             setCurrentStep(prev => prev + 1);
         } else {
-            setCurrentStep(totalSteps + 1); // Sonuç ekranı
+            setCurrentStep(totalSteps + 1);
         }
     };
 
@@ -64,7 +61,6 @@ export default function SymptomChecker() {
         setGender(null);
     };
 
-    // --- SONUÇ HESAPLAMA ---
     const getRecommendedTests = () => {
         const triggeredTests = new Set();
 
@@ -80,7 +76,6 @@ export default function SymptomChecker() {
                     option.triggers.forEach(testId => {
                         if (testId === 'menopause' && gender === 'male') return;
                         if (testId === 'male-fertility' && gender === 'female') return;
-
                         triggeredTests.add(testId);
                     });
                 }
@@ -90,15 +85,15 @@ export default function SymptomChecker() {
         return Array.from(triggeredTests).map(id => symptomsData.tests[id]).filter(Boolean);
     };
 
-    // --- SONUÇ EKRANI RENDER ---
+    // --- SONUÇ EKRANI ---
     if (currentStep > totalSteps) {
         const results = getRecommendedTests();
 
         return (
-            <div className="w-full max-w-4xl mx-auto py-12 px-2">
-                <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 md:p-12 px-3 text-center">
+            <div className="w-full max-w-4xl mx-auto py-12 px-4">
+                <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 md:p-12 text-center">
                     <h2 className="font-garet font-bold text-2xl md:text-3xl text-slate-900 mb-8 uppercase leading-tight">
-                        Based on your answers you may want to check the following self-tests:
+                        {t('symptoms.results_title')}
                     </h2>
 
                     {results.length > 0 ? (
@@ -107,37 +102,35 @@ export default function SymptomChecker() {
                                 <Link
                                     key={idx}
                                     href={test.link}
-                                    className={`flex items-center justify-center w-full h-full min-h-[40px] py-4 px-6 rounded-lg text-white font-bold uppercase tracking-wide shadow-md hover:shadow-lg hover:opacity-90 transition-all text-center leading-snug ${test.color || "bg-slate-900"}`}
+                                    className={`flex items-center justify-center w-full min-h-[50px] py-4 px-6 rounded-lg text-white font-bold uppercase tracking-wide shadow-md hover:shadow-lg hover:opacity-90 transition-all text-center leading-snug ${test.color || "bg-slate-900"}`}
                                 >
-                                    {test.title}
+                                    {t(test.titleKey)}
                                 </Link>
                             ))}
                         </div>
                     ) : (
                         <div className="bg-green-50 p-6 rounded-lg border border-green-200 mb-10">
                             <p className="text-green-800 font-medium text-lg">
-                                Based on your answers, we do not have specific test recommendations.
-                                However, if you are concerned about your health, please consult a GP.
+                                {t('symptoms.no_results')}
                             </p>
                         </div>
                     )}
 
-                    {/* SONUÇ EKRANI BUTONLARI - DÜZELTİLDİ */}
                     <div className="flex justify-center gap-4 mt-8">
-                        <div className='w-1/2'>
+                        <div className="w-1/2">
                             <Link
                                 href="/"
-                                className="flex items-center justify-center px-8 py-3 h-12 rounded-full border-2 border-slate-300 text-slate-600 font-bold hover:bg-slate-50 transition sm:w-auto uppercase"
+                                className="flex items-center justify-center px-8 py-3 h-12 rounded-full border-2 border-slate-300 text-slate-600 font-bold hover:bg-slate-50 transition uppercase w-full"
                             >
-                                HOME
+                                {t('symptoms.btn_home')}
                             </Link>
                         </div>
-                        <div className='w-1/2'>
+                        <div className="w-1/2">
                             <Button
                                 onClick={handleReset}
-                                className="px-8 py-3 h-12 rounded-full bg-[#F5A623] hover:bg-[#E0961F] text-white font-bold sm:w-auto uppercase"
+                                className="px-8 py-3 h-12 rounded-full bg-[#F5A623] hover:bg-[#E0961F] text-white font-bold uppercase w-full"
                             >
-                                START AGAIN
+                                {t('symptoms.btn_start_again')}
                             </Button>
                         </div>
                     </div>
@@ -146,11 +139,11 @@ export default function SymptomChecker() {
         );
     }
 
-    // --- SORU EKRANI RENDER ---
+    // --- SORU EKRANI ---
     return (
         <div className="w-full min-h-screen bg-white py-12 px-4 flex flex-col items-center">
 
-            {/* BAŞLIK VE DEKOR */}
+            {/* BAŞLIK */}
             <div className="text-center mb-10 relative w-full max-w-2xl">
                 <div className="absolute -top-10 -left-10 hidden md:block opacity-30">
                     <Image src="/silex-decorative.svg" width={80} height={80} alt="Decor" />
@@ -159,7 +152,7 @@ export default function SymptomChecker() {
                     CHECK<br />SYMPTOMS
                 </h1>
                 <p className="font-inter text-slate-500 font-bold tracking-wider mt-2 uppercase">
-                    {symptomsData.subtitle}
+                    {t('symptoms.subtitle')}
                 </p>
                 <div className="absolute -bottom-10 -right-10 hidden md:block opacity-30 rotate-180">
                     <Image src="/silex-decorative.svg" width={80} height={80} alt="Decor" />
@@ -169,26 +162,22 @@ export default function SymptomChecker() {
             {/* SORU KARTI */}
             <div className="w-full max-w-2xl bg-white rounded-xl shadow-lg border border-gray-100 p-4 md:p-10 relative z-10">
 
-                {/* Adım Başlığı */}
                 <div className="text-center mb-8">
                     <h2 className="text-2xl font-bold text-slate-900 mb-2">
-                        {stepData.title}
+                        {t(stepData.titleKey)}
                     </h2>
                     <p className="text-sm font-bold text-slate-400">
-                        Step {currentStep}/{totalSteps}
+                        {t('symptoms.step_label', { current: currentStep, total: totalSteps })}
                     </p>
                 </div>
 
-                {/* Seçenekler */}
                 <div className="flex flex-col gap-3">
                     {stepData.options.map((option, idx) => {
-
-                        // Cinsiyet Filtresi
+                        // Cinsiyet filtresi
                         if (option.type && option.type !== gender && gender && option.type !== 'all') {
                             return null;
                         }
 
-                        // Seçili mi?
                         const isSelected = stepData.type === 'single'
                             ? selections[currentStep] === option.value
                             : (selections[currentStep] || []).includes(option.value);
@@ -204,23 +193,21 @@ export default function SymptomChecker() {
                                         : "border-gray-200 text-slate-600 hover:border-gray-400 hover:bg-gray-50"
                                 )}
                             >
-                                <span>{option.label}</span>
+                                <span>{t(option.labelKey)}</span>
                                 {isSelected && <span className="text-xl">✓</span>}
                             </button>
                         );
                     })}
                 </div>
 
-                {/* Navigasyon Butonları */}
                 <div className="flex justify-between items-center mt-10 pt-6 border-t border-gray-100">
                     <div className="w-1/3">
                         {currentStep > 1 && (
-                            // BACK BUTONU DÜZELTİLDİ: Artık gri hap şeklinde
                             <button
                                 onClick={handleBack}
                                 className="px-8 py-3 rounded-full bg-gray-400 text-white font-bold hover:bg-gray-500 transition shadow-sm"
                             >
-                                BACK
+                                {t('symptoms.btn_back')}
                             </button>
                         )}
                     </div>
@@ -231,7 +218,7 @@ export default function SymptomChecker() {
                             disabled={!selections[currentStep] || selections[currentStep].length === 0}
                             className="px-8 py-3 rounded-full bg-[#F5A623] text-white font-bold hover:bg-[#E0961F] transition disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg"
                         >
-                            {currentStep === totalSteps ? "SUBMIT" : "NEXT"}
+                            {currentStep === totalSteps ? t('symptoms.btn_submit') : t('symptoms.btn_next')}
                         </button>
                     </div>
                 </div>

@@ -103,7 +103,7 @@ export function Header() {
             {/* 1. LOGO (SOL TARAFTA SABİT) */}
             <Link href="/" className="flex-shrink-0 z-50">
                 <Image
-                    src="/sliex-logo.png"
+                    src="/allvex-logo-transparent-2.png"
                     width={170}
                     height={40}
                     alt="Logo"
@@ -192,7 +192,7 @@ export function Header() {
                         <SheetHeader className="p-6 border-b">
                             <SheetTitle className="text-left">
                                 <Image
-                                    src="/sliex-logo.png"
+                                    src="/allvex-logo-transparent-2.png"
                                     width={130}
                                     height={35}
                                     alt="Logo Mobile"
