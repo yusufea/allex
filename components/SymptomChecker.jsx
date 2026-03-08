@@ -149,7 +149,7 @@ export default function SymptomChecker() {
                     <Image src="/allvex-decorative.svg" width={80} height={80} alt="Decor" />
                 </div>
                 <h1 className="font-garet font-black text-4xl md:text-6xl text-slate-900 leading-none">
-                    CHECK<br />SYMPTOMS
+                    {t('symptoms.title_line1')}<br />{t('symptoms.title_line2')}
                 </h1>
                 <p className="font-inter text-slate-500 font-bold tracking-wider mt-2 uppercase">
                     {t('symptoms.subtitle')}
