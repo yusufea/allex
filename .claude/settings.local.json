@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mv \"silex-no-text.svg\" \"allvex-no-text.svg\")",
+      "Bash(mv \"silex.svg\" \"allvex.svg\")"
+    ]
+  }
+}

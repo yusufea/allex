@@ -212,7 +212,7 @@ export default function QuizEngine({ quizData, quizList }) {
                                 <p className="text-xl font-bold text-slate-900">Your Answer: <span className="text-red-500">{currentRec.userAnswerLabel}</span></p>
                             </div>
                             <div className="prose max-w-none text-slate-700 text-sm">
-                                <p className="mb-3 font-bold text-slate-900">Silex recommendation: <span className="font-normal">{currentRec.data.intro}</span></p>
+                                <p className="mb-3 font-bold text-slate-900">Allvex recommendation: <span className="font-normal">{currentRec.data.intro}</span></p>
                                 {currentRec.data.list && <ul className="list-disc pl-5 space-y-2 mb-4">{currentRec.data.list.map((p, i) => <li key={i}>{p}</li>)}</ul>}
                                 {/* Products logic here */}
                             </div>

@@ -12,7 +12,7 @@ export default function Home() {
     { key: "hero.btn_symptoms", href: "/health-check/check-symptoms", color: "bg-blue-100 text-blue-700 hover:bg-blue-400" },
     { key: "hero.btn_conditions", href: "/health-check/vitamin-d-checker", color: "bg-green-100 text-green-700 hover:bg-green-400" },
     { key: "hero.btn_index", href: "/health-check/general-health-checker", color: "bg-purple-100 text-purple-700 hover:bg-purple-400" },
-    { key: "hero.btn_silex", href: "/self-tests", color: "bg-rose-100 text-rose-700 hover:bg-rose-400" },
+    { key: "hero.btn_allvex", href: "/self-tests", color: "bg-rose-100 text-rose-700 hover:bg-rose-400" },
     { key: "hero.btn_buy", href: "/where-to-buy", color: "bg-orange-100 text-orange-700 hover:bg-orange-400" },
     { key: "hero.btn_distributor", href: "/distributor", color: "bg-slate-300 text-slate-700 hover:bg-slate-300" }
   ];
@@ -150,7 +150,7 @@ export default function Home() {
             <div className="relative w-full max-w-[350px]">
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] h-[250px] bg-blue-100 rounded-full blur-3xl -z-10 opacity-60"></div>
               <Image
-                src="/silex-home-1.svg"
+                src="/allvex-home-1.svg"
                 width={400}
                 height={400}
                 alt="Allex Home Visual"
@@ -552,9 +552,9 @@ export default function Home() {
           // autoPlay // Otomatik başlaması için (genelde muted ile kullanılır)
           // muted // Otomatik başlayacaksa sessiz olmalı
           // loop // Sürekli dönmesi için
-          poster="/silex-about-video-thumbnail.jpg" // Video yüklenmeden önce görünecek kapak resmi
+          poster="/allvex-about-video-thumbnail.jpg" // Video yüklenmeden önce görünecek kapak resmi
         >
-          <source src="/about-silex.mp4" type="video/mp4" />
+          <source src="/about-allvex.mp4" type="video/mp4" />
           Tarayıcınız video etiketini desteklemiyor.
         </video>
 

@@ -54,7 +54,7 @@ export default function Footer() {
                         <Link href="/" className="mb-2">
                             <Image
                                 src="/allvex-logo-transparent-2.png"
-                                alt="Silex Logo"
+                                alt="Allvex Logo"
                                 width={200}
                                 height={55}
                                 className="w-[200px] h-auto object-contain"

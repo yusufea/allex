@@ -43,13 +43,13 @@ export default function OurStoryPage() {
 
                             <p className="font-inter text-base md:text-lg text-slate-600 leading-relaxed">
                                 So, with this in mind, we have decided to make a positive change in
-                                the world of personal health. Silex Self-Tests are available for you
+                                the world of personal health. Allvex Self-Tests are available for you
                                 to take at home and cover a broad range of potentially underlying
-                                health conditions. Silex doesn&apos;t have all the answers and doesn&apos;t
+                                health conditions. Allvex doesn&apos;t have all the answers and doesn&apos;t
                                 replace the role of your GP, but our Self-Tests do empower you to
                                 better understand your overall health, provide early screening for
                                 potential health conditions and start you on a positive health journey.
-                                Silex Self-Tests start you on a journey that gets you on the front foot
+                                Allvex Self-Tests start you on a journey that gets you on the front foot
                                 with your health, with regular testing in the comfort of your own home.
                             </p>
 
@@ -68,14 +68,14 @@ export default function OurStoryPage() {
                                     Check Symptoms
                                 </Link>
                                 <Link
-                                    href="/#aboutSilexVideo"
+                                    href="/#aboutAllvexVideo"
                                     className="flex items-center gap-2 text-slate-700 hover:text-slate-900 transition-colors group"
                                 >
                                     <span className="w-9 h-9 rounded-full border-2 border-slate-700 group-hover:border-slate-900 flex items-center justify-center flex-shrink-0">
                                         <Play className="w-3.5 h-3.5 fill-current ml-0.5" />
                                     </span>
                                     <span className="font-garet font-black text-sm uppercase tracking-wide">
-                                        About Silex
+                                        About Allvex
                                     </span>
                                 </Link>
                             </div>
@@ -127,7 +127,7 @@ export default function OurStoryPage() {
                                 being on the front foot is absolutely crucial.
                             </h3>
                             <p className="font-inter text-base md:text-lg text-slate-600 leading-relaxed">
-                                Silex&apos;s mission is to make high quality healthcare
+                                Allvex&apos;s mission is to make high quality healthcare
                                 testing kits affordable and available for as many
                                 people as possible. We provide consumers an opportunity
                                 to monitor health and wellness outside of a clinic or hospital
@@ -165,11 +165,11 @@ export default function OurStoryPage() {
                             <p className="font-inter text-base md:text-lg text-slate-600 leading-relaxed">
                                 With this in mind, we have created a Self-Test
                                 range that empowers consumers to take control of their
-                                own health. We have developed SILEX, a range of rapid
+                                own health. We have developed ALLVEX, a range of rapid
                                 self-tests clinically proven to identify a range of
                                 illnesses and specific conditions with the highest accuracy
                                 readings that can be administered in the comfort and privacy
-                                of your own home. Silex tests provide a swift results of a
+                                of your own home. Allvex tests provide a swift results of a
                                 potential healthcare condition, which can then be followed
                                 up with an appointment with a healthcare provider.
                             </p>
@@ -206,7 +206,7 @@ export default function OurStoryPage() {
                                 quality tests on the UK market.
                             </h3>
                             <p className="font-inter text-base md:text-lg text-slate-600 leading-relaxed">
-                                Silex Self-Tests are tested and certified to the
+                                Allvex Self-Tests are tested and certified to the
                                 highest of standards on the UK market. All tests
                                 hold accreditations validating their high accuracy
                                 and ensuring they are eligible for sale on the UK and

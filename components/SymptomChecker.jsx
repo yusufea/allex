@@ -146,7 +146,7 @@ export default function SymptomChecker() {
             {/* BAŞLIK */}
             <div className="text-center mb-10 relative w-full max-w-2xl">
                 <div className="absolute -top-10 -left-10 hidden md:block opacity-30">
-                    <Image src="/silex-decorative.svg" width={80} height={80} alt="Decor" />
+                    <Image src="/allvex-decorative.svg" width={80} height={80} alt="Decor" />
                 </div>
                 <h1 className="font-garet font-black text-4xl md:text-6xl text-slate-900 leading-none">
                     CHECK<br />SYMPTOMS
@@ -155,7 +155,7 @@ export default function SymptomChecker() {
                     {t('symptoms.subtitle')}
                 </p>
                 <div className="absolute -bottom-10 -right-10 hidden md:block opacity-30 rotate-180">
-                    <Image src="/silex-decorative.svg" width={80} height={80} alt="Decor" />
+                    <Image src="/allvex-decorative.svg" width={80} height={80} alt="Decor" />
                 </div>
             </div>
 
