@@ -55,6 +55,7 @@ const getMenuData = (t) => [
         title: t('nav.self_tests'),
         href: "/self-tests",
         items: [
+            { title: t('nav.vitamin_d'), href: "/self-tests/vitamin-d" },
             { title: t('nav.iron'), href: "/self-tests/iron-deficiency" },
             { title: t('nav.thyroid'), href: "/self-tests/under-active-thyroid" },
             { title: "Bowel Health (FOB)", href: "/self-tests/bowel-health" },
@@ -93,7 +94,17 @@ export function Header() {
 
     const menuData = getMenuData(t);
 
-    if (!mounted) return null;
+    if (!mounted) return (
+        <div className="fixed top-0 left-0 w-full z-50 flex items-center justify-between py-3 border-b px-4 md:px-6 bg-white shadow-sm h-[57px]">
+            <div className="w-[140px] md:w-[170px] h-8 bg-slate-200 animate-pulse rounded" />
+            <div className="hidden min-[1300px]:flex items-center gap-6">
+                {Array.from({ length: 6 }).map((_, i) => (
+                    <div key={i} className="h-5 w-20 bg-slate-200 animate-pulse rounded" />
+                ))}
+            </div>
+            <div className="min-[1300px]:hidden w-8 h-8 bg-slate-200 animate-pulse rounded" />
+        </div>
+    );
 
     return (
         // GÜNCELLEME BURADA: fixed, top-0, z-50 eklendi.
