@@ -3,10 +3,13 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import "@/lib/i18n";
+import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
 export default function QuizEngine({ quizData, quizList }) {
+    const { t } = useTranslation();
     const [currentStepIndex, setCurrentStepIndex] = useState(0);
     const [answers, setAnswers] = useState({});
     const [scores, setScores] = useState({});
@@ -56,9 +59,9 @@ export default function QuizEngine({ quizData, quizList }) {
 
                 const val = answers[q.id];
                 const opt = q.options.find(o => o.value === val);
-                
+
                 if (opt && (opt.value === "yes" || opt.score > 0 || opt.isRedFlag)) {
-                    positiveAnswersList.push(q.text);
+                    positiveAnswersList.push(q.textKey ? t(q.textKey) : q.text);
                 }
             });
         });
@@ -221,7 +224,7 @@ export default function QuizEngine({ quizData, quizList }) {
                 )}
                 
                 <div className="mt-8 flex justify-center">
-                     <Button onClick={() => window.location.reload()} variant="outline" className="px-8 py-3 rounded-full border-2 font-bold uppercase hover:bg-slate-50">RETAKE TEST</Button>
+                     <Button onClick={() => window.location.reload()} variant="outline" className="px-8 py-3 rounded-full border-2 font-bold uppercase hover:bg-slate-50">{t('checker.btn_retake')}</Button>
                 </div>
             </div>
         );
@@ -262,51 +265,75 @@ export default function QuizEngine({ quizData, quizList }) {
 
     // 3. STANDARD RENDER
     const renderStandardResult = () => {
-        const txt = quizData.resultTexts || {}; 
-        // ... (Standart render kodun aynı kalabilir, sadece return yapısı)
-        // Basitlik için sadece temel yapıyı koyuyorum, senin önceki kodundaki aynı kalmalı.
+        const txt = quizData.resultTexts || {};
+        const commonInfo = txt.commonInfoKeys
+            ? txt.commonInfoKeys.map((k, i) => <p key={i} className={i > 0 ? "mt-2" : ""}>{t(k)}</p>)
+            : txt.commonInfo;
+
+        const redFlagIntro    = txt.redFlagIntroKey    ? t(txt.redFlagIntroKey)    : txt.redFlagIntro;
+        const redFlagWarning  = txt.redFlagWarningKey  ? t(txt.redFlagWarningKey)  : txt.redFlagWarning;
+        const positiveIntro   = txt.positiveIntroKey   ? t(txt.positiveIntroKey)   : txt.positiveIntro;
+        const positiveWarning = txt.positiveWarningKey ? t(txt.positiveWarningKey) : txt.positiveWarning;
+        const negativeIntro   = txt.negativeIntroKey   ? t(txt.negativeIntroKey)   : txt.negativeIntro;
+
         if (totalFlags > 0) {
-             return (
+            return (
                 <div className="bg-white p-6 md:p-10 rounded-xl shadow-sm border border-gray-200">
                     <div className="border-b pb-6 mb-6">
-                        <h2 className="text-xl font-bold text-slate-900">Your result:</h2>
+                        <h2 className="text-xl font-bold text-slate-900">{t('checker.result_your_result')}</h2>
                         <div className="flex justify-between items-end mt-2">
-                             <p className="text-3xl font-black text-slate-900">Score: {totalScore}/{calculatedTotalScore}</p>
-                             <p className="text-xl font-bold text-red-600">Attention flags: {totalFlags}/{calculatedTotalFlags}</p>
+                            <p className="text-3xl font-black text-slate-900">{t('checker.result_score')} {totalScore}/{calculatedTotalScore}</p>
+                            <p className="text-xl font-bold text-red-600">{t('checker.result_flags')} {totalFlags}/{calculatedTotalFlags}</p>
                         </div>
                     </div>
                     <div className="prose max-w-none text-slate-600">
-                        <p className="mb-4">{txt.redFlagIntro}</p>
-                        <p className="font-bold text-slate-900 mb-2">As you answered yes to:</p>
+                        <p className="mb-4">{redFlagIntro}</p>
+                        <p className="font-bold text-slate-900 mb-2">{t('checker.result_answered_yes')}</p>
                         <ul className="list-disc pl-5 mb-4 space-y-1">
                             {positiveAnswersList.map((text, idx) => <li key={idx} className="font-medium text-slate-800">{text}</li>)}
                         </ul>
-                        <div className="bg-red-50 p-4 rounded-lg border-l-4 border-red-500 mb-6"><p className="text-red-800 font-medium">{txt.redFlagWarning}</p></div>
-                        <div className="space-y-4 mt-6 border-t pt-6 text-sm">{txt.commonInfo}</div>
+                        <div className="bg-red-50 p-4 rounded-lg border-l-4 border-red-500 mb-6"><p className="text-red-800 font-medium">{redFlagWarning}</p></div>
+                        <div className="space-y-4 mt-6 border-t pt-6 text-sm">{commonInfo}</div>
+                    </div>
+                    <ResultButtons />
+                </div>
+            );
+        } else if (totalScore > 0) {
+            return (
+                <div className="bg-white p-6 md:p-10 rounded-xl shadow-sm border border-gray-200">
+                    <div className="border-b pb-6 mb-6">
+                        <h2 className="text-xl font-bold text-slate-900">{t('checker.result_your_result')}</h2>
+                        <p className="text-3xl font-black text-slate-900 mt-2">{t('checker.result_score')} {totalScore}/{calculatedTotalScore}</p>
+                    </div>
+                    <div className="prose max-w-none text-slate-600">
+                        <div className="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-500 mb-6"><p className="text-yellow-800 font-medium">{positiveIntro}</p></div>
+                        {positiveWarning && <p className="mb-4 text-sm">{positiveWarning}</p>}
+                        <div className="space-y-4 mt-6 border-t pt-6 text-sm">{commonInfo}</div>
                     </div>
                     <ResultButtons />
                 </div>
             );
         } else {
-             return (
+            return (
                 <div className="bg-white p-6 md:p-10 rounded-xl shadow-sm border border-gray-200">
-                    <div className="border-b pb-6 mb-6"><h2 className="text-xl font-bold text-slate-900">Your result:</h2></div>
+                    <div className="border-b pb-6 mb-6"><h2 className="text-xl font-bold text-slate-900">{t('checker.result_your_result')}</h2></div>
                     <div className="prose max-w-none text-slate-600">
-                        <div className="bg-green-50 p-4 rounded-lg border-l-4 border-green-500 mb-6"><p className="text-green-800 font-medium">Your answers indicate that you do not have symptoms.</p></div>
-                        <div className="space-y-4 mt-6 border-t pt-6 text-sm">{txt.commonInfo}</div>
+                        <div className="bg-green-50 p-4 rounded-lg border-l-4 border-green-500 mb-6"><p className="text-green-800 font-medium">{negativeIntro || t('checker.result_no_symptoms')}</p></div>
+                        <div className="space-y-4 mt-6 border-t pt-6 text-sm">{commonInfo}</div>
                     </div>
                     <ResultButtons />
                 </div>
-             );
+            );
         }
     };
 
     const ResultButtons = () => {
         const txt = quizData.resultTexts || {};
+        const btnText = txt.productBtnTextKey ? t(txt.productBtnTextKey) : (txt.productBtnText || t('checker.view_test'));
         return (
             <div className="flex flex-col sm:flex-row gap-4 mt-8">
                 <Button asChild className="w-full h-14 rounded-full bg-slate-900 text-white hover:bg-slate-800 font-bold uppercase text-sm sm:text-base tracking-wide shadow-lg hover:shadow-xl transition-all">
-                    <Link href={txt.productLink || "#"}>{txt.productBtnText || "VIEW TEST KIT"}</Link>
+                    <Link href={txt.productLink || "#"}>{btnText}</Link>
                 </Button>
             </div>
         );
@@ -318,7 +345,7 @@ export default function QuizEngine({ quizData, quizList }) {
             {/* ... Header ve Navigation aynı ... */}
             <div className='flex flex-col lg:flex-row gap-6 lg:gap-8 mb-12 items-start'>
                 <div className='w-full lg:w-1/4 shrink-0'>
-                    <h1 className='font-garet font-bold text-xl md:text-2xl text-slate-900 leading-tight'>CHOOSE A HEALTH CONDITION QUESTIONNAIRE:</h1>
+                    <h1 className='font-garet font-bold text-xl md:text-2xl text-slate-900 leading-tight'>{t('checker.nav_title')}</h1>
                 </div>
                 <div className="w-full lg:w-3/4">
                     <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3">
@@ -336,12 +363,12 @@ export default function QuizEngine({ quizData, quizList }) {
                 <div className="w-full md:w-1/3 pt-10">
                     <div className="relative inline-block">
                         <div className="relative z-10">
-                            <h1 className="font-garet font-black text-4xl sm:text-5xl lg:text-5xl leading-[0.9] text-slate-900">{quizData.title}</h1>
+                            <h1 className="font-garet font-black text-4xl sm:text-5xl lg:text-5xl leading-[0.9] text-slate-900">{quizData.titleKey ? t(quizData.titleKey) : quizData.title}</h1>
                             {/* BMI Description Check */}
                             {quizData.description ? (
                                 <div className="mt-6 text-sm text-slate-600 leading-relaxed font-inter">{quizData.description}</div>
                             ) : (
-                                <p className="font-inter text-sm font-bold text-slate-400 uppercase tracking-wider mt-4">{quizData.subtitle}</p>
+                                <p className="font-inter text-sm font-bold text-slate-400 uppercase tracking-wider mt-4">{quizData.subtitleKey ? t(quizData.subtitleKey) : quizData.subtitle}</p>
                             )}
                         </div>
                     </div>
@@ -368,7 +395,7 @@ export default function QuizEngine({ quizData, quizList }) {
                             <div className="flex flex-col gap-8 mb-10 min-h-[200px]">
                                 {currentStep.questions.map((question) => (
                                     <div key={question.id} className="flex flex-col gap-4">
-                                        <h2 className="text-2xl font-bold text-slate-900">{question.text}</h2>
+                                        <h2 className="text-2xl font-bold text-slate-900">{question.textKey ? t(question.textKey) : question.text}</h2>
                                         
                                         {/* INPUT CHECK */}
                                         {question.type === 'input' ? (
@@ -399,7 +426,7 @@ export default function QuizEngine({ quizData, quizList }) {
                                                                     : "border-gray-300 text-gray-500 hover:border-gray-400 bg-white"
                                                             )}
                                                         >
-                                                            {option.label}
+                                                            {option.labelKey ? t(option.labelKey) : option.label}
                                                         </button>
                                                     )
                                                 })}
@@ -412,17 +439,16 @@ export default function QuizEngine({ quizData, quizList }) {
                             </div>
 
                             <div className="flex justify-between items-center pt-6 border-t border-gray-100">
-                                <button onClick={handleBack} disabled={currentStepIndex === 0} className="px-8 py-3 rounded-full bg-gray-400 text-white font-bold disabled:opacity-50 hover:bg-gray-500 transition">BACK</button>
-                                <button 
-                                    onClick={handleNext} 
-                                    // Input kontrolü: Eğer input ise ve boşsa disable et
+                                <button onClick={handleBack} disabled={currentStepIndex === 0} className="px-8 py-3 rounded-full bg-gray-400 text-white font-bold disabled:opacity-50 hover:bg-gray-500 transition">{t('checker.btn_back')}</button>
+                                <button
+                                    onClick={handleNext}
                                     disabled={currentStep.questions.some(q => {
                                         if (q.type === 'input') return !answers[q.id];
                                         return !answers[q.id];
                                     })}
                                     className="px-10 py-3 rounded-full bg-[#F5A623] text-white font-bold hover:bg-[#E0961F] transition disabled:opacity-50"
                                 >
-                                    {currentStepIndex === totalSteps - 1 ? "Calculate" : "NEXT"}
+                                    {quizData.isCalculator && currentStepIndex === totalSteps - 1 ? t('checker.btn_calculate') : currentStepIndex === totalSteps - 1 ? t('checker.btn_submit') : t('checker.btn_next')}
                                 </button>
                             </div>
                         </div>

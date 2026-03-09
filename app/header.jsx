@@ -45,10 +45,10 @@ const getMenuData = (t) => [
         title: t('nav.health_checkgers'),
         href: "/health-check",
         items: [
-            { title: t('nav.symptoms'), href: "/health-check/check-symptoms" },
-            { title: t('nav.conditions'), href: "/health-check/vitamin-d-checker" },
-            { title: "Check Health Index", href: "/health-check/check-health-index" },
-            { title: "BMI Calculator", href: "/health-check/bmi-calculator" }
+            { title: t('nav.vitamin_d_checker'),        href: "/health-check/vitamin-d-checker" },
+            { title: t('nav.iron_deficiency_checker'),  href: "/health-check/iron-deficiency-checker" },
+            { title: t('nav.uti_checker'),              href: "/health-check/uti-checker" },
+            { title: t('nav.male_fertility_checker'),   href: "/health-check/male-fertility-checker" },
         ]
     },
     {
@@ -57,8 +57,8 @@ const getMenuData = (t) => [
         items: [
             { title: t('nav.vitamin_d'), href: "/self-tests/vitamin-d" },
             { title: t('nav.iron'), href: "/self-tests/iron-deficiency" },
-            { title: t('nav.thyroid'), href: "/self-tests/under-active-thyroid" },
-            { title: "Bowel Health (FOB)", href: "/self-tests/bowel-health" },
+            { title: t('nav.uti'), href: "/self-tests/uti" },
+            { title: t('nav.male_fertility'), href: "/self-tests/male-fertility" },
         ]
     },
     {

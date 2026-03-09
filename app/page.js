@@ -72,35 +72,22 @@ export default function Home() {
       title: t('tests.categories.wellbeing'),
       headerColor: "bg-[#F4D03F]",
       items: [
-        { name: t('tests.items.vit_d'), href: "/tests/vitamin-d", barColor: "bg-[#F4D03F]" },
-        { name: t('tests.items.iron'), href: "/tests/iron", barColor: "bg-[#CD5C5C]" },
-        { name: t('tests.items.thyroid'), href: "/tests/thyroid", barColor: "bg-[#483D8B]" },
-        { name: t('tests.items.covid'), href: "/tests/covid", barColor: "bg-[#FF4500]" },
-      ]
-    },
-    {
-      title: t('tests.categories.organ'),
-      headerColor: "bg-[#007ACC]",
-      items: [
-        { name: t('tests.items.stomach'), href: "/tests/stomach", barColor: "bg-[#00CED1]" },
-        { name: t('tests.items.bowel'), href: "/tests/bowel", barColor: "bg-[#2E8B57]" },
-        { name: t('tests.items.inflammation'), href: "/tests/inflammation", barColor: "bg-[#FF4500]" },
+        { name: t('tests.items.vit_d'), href: "/self-tests/vitamin-d", barColor: "bg-[#F4D03F]" },
+        { name: t('tests.items.iron'), href: "/self-tests/iron-deficiency", barColor: "bg-[#CD5C5C]" },
       ]
     },
     {
       title: t('tests.categories.fertility'),
       headerColor: "bg-[#9B59B6]",
       items: [
-        { name: t('tests.items.menopause'), href: "/tests/menopause", barColor: "bg-[#DA70D6]" },
-        { name: t('tests.items.male_fertility'), href: "/tests/male-fertility", barColor: "bg-[#1E90FF]" },
+        { name: t('tests.items.male_fertility'), href: "/self-tests/male-fertility", barColor: "bg-[#1E90FF]" },
       ]
     },
     {
       title: t('tests.categories.sexual'),
       headerColor: "bg-[#E91E63]",
       items: [
-        { name: t('tests.items.vaginal'), href: "/tests/vaginal", barColor: "bg-[#FF69B4]" },
-        { name: t('tests.items.uti'), href: "/tests/uti", barColor: "bg-[#8FBC8F]" },
+        { name: t('tests.items.uti'), href: "/self-tests/uti", barColor: "bg-[#8FBC8F]" },
       ]
     }
   ];
@@ -150,7 +137,7 @@ export default function Home() {
             <div className="relative w-full max-w-[350px]">
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] h-[250px] bg-blue-100 rounded-full blur-3xl -z-10 opacity-60"></div>
               <Image
-                src="/allvex-home-1.svg"
+                src="/allvex-icon-hd.png"
                 width={400}
                 height={400}
                 alt="Allex Home Visual"
@@ -162,6 +149,55 @@ export default function Home() {
 
         </div>
       </div>
+
+      {/* ================================================================= */
+      /* --- OUR TESTS SECTION --- */
+      /* ================================================================= */}
+      <section className="w-full py-16 md:py-24 bg-white">
+        <div className="w-full max-w-[1440px] mx-auto px-[25px] sm:px-[37px] md:px-[50px]">
+
+          {/* Ana Başlık */}
+          <h2 className="font-garet font-black text-4xl sm:text-5xl text-slate-900 mb-12 uppercase">
+            {t('tests.main_title')}
+          </h2>
+
+          {/* Grid Yapısı */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-x-8 gap-y-12 items-start">
+
+            {testCategories.map((category, index) => (
+              <div key={index} className="flex flex-col gap-6 h-full">
+
+                <div className={`w-full py-2.5 px-4 rounded-full text-center flex items-center justify-center min-h-[44px] ${category.headerColor}`}>
+                  <h3 className="text-white font-garet font-bold text-sm sm:text-base uppercase tracking-wide leading-none">
+                    {category.title}
+                  </h3>
+                </div>
+
+                <div className="flex flex-col gap-4 flex-1">
+                  {category.items.map((item, itemIndex) => (
+                    <Link
+                      key={itemIndex}
+                      href={item.href}
+                      className="group flex flex-row items-stretch gap-3 hover:opacity-80 transition-opacity min-h-[40px]"
+                    >
+                      <span
+                        className={`w-[6px] shrink-0 rounded-sm ${item.barColor}`}
+                        aria-hidden="true"
+                      ></span>
+                      <span className="font-inter font-semibold text-sm sm:text-base text-slate-900 uppercase leading-snug flex items-center py-1">
+                        {item.name}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+
+              </div>
+            ))}
+
+          </div>
+
+        </div>
+      </section>
 
       {/* --- FEATURES SECTION --- */}
       {/* Burada yapıyı Flex container içine aldık.
@@ -573,64 +609,6 @@ export default function Home() {
 
       </section>
 
-      {/* ================================================================= */
-      /* --- OUR TESTS SECTION --- */
-      /* ================================================================= */}
-      <section className="w-full py-16 md:py-24 bg-white">
-        <div className="w-full max-w-[1440px] mx-auto px-[25px] sm:px-[37px] md:px-[50px]">
-
-          {/* Ana Başlık */}
-          <h2 className="font-garet font-black text-4xl sm:text-5xl text-slate-900 mb-12 uppercase">
-            {t('tests.main_title')}
-          </h2>
-
-          {/* Grid Yapısı */}
-          {/* items-start yerine items-stretch kullanıyoruz ki hepsi eşit boyda görünsün (arka plan vs. verilirse) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12 items-start">
-
-            {testCategories.map((category, index) => (
-              /* h-full: Kolonun yüksekliğini, grid hücresinin tamamına yayar. */
-              <div key={index} className="flex flex-col gap-6 h-full">
-
-                {/* Kategori Başlığı (Hap Şeklinde) */}
-                {/* min-h-[40px] ve flex items-center justify-center: İçerik kısa veya uzun olsa da başlık kutuları eşit yüksekliğe yaklaşır */}
-                <div className={`w-full py-2.5 px-4 rounded-full text-center flex items-center justify-center min-h-[44px] ${category.headerColor}`}>
-                  <h3 className="text-white font-garet font-bold text-sm sm:text-base uppercase tracking-wide leading-none">
-                    {category.title}
-                  </h3>
-                </div>
-
-                {/* Test Listesi */}
-                <div className="flex flex-col gap-4 flex-1">
-                  {category.items.map((item, itemIndex) => (
-                    <Link
-                      key={itemIndex}
-                      href={item.href}
-                      className="group flex flex-row items-stretch gap-3 hover:opacity-80 transition-opacity min-h-[40px]"
-                    >
-                      {/* Sol Renkli Çubuk */}
-                      {/* w-[6px] sabit genişlik, h-auto ile metin ne kadar uzarsa çubuk o kadar uzar */}
-                      <span
-                        className={`w-[6px] shrink-0 rounded-sm ${item.barColor}`}
-                        aria-hidden="true"
-                      ></span>
-
-                      {/* Test İsmi */}
-                      {/* flex items-center: Yazının dikeyde ortalı durmasını sağlar */}
-                      <span className="font-inter font-semibold text-sm sm:text-base text-slate-900 uppercase leading-snug flex items-center py-1">
-                        {item.name}
-                      </span>
-                    </Link>
-                  ))}
-                </div>
-
-              </div>
-            ))}
-
-          </div>
-
-        </div>
-      </section>
     </div>
   );
 }
